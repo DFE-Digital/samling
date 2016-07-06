@@ -1,0 +1,266 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="public/css/bootstrap.css" rel="stylesheet">
+  <link href="public/css/samling.css" rel="stylesheet">
+
+  <script src="public/js/jquery.min.js"></script>
+  <script src="public/js/bootstrap.min.js"></script>
+  <script src="public/forge.bundle.js"></script>
+  <script src="public/bundle.js"></script>
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-static-top samling-navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img class="samling-brand-logo" data-toggle="tooltip"
+           title="Samling logo courtesy of Arturo Alejandro Romo Escartin" data-placement="bottom"
+           src="public/lion.svg" >
+      <span class="samling-brand">SAMLING</span>
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar navbar-left">
+  <div class="container-fluid">
+    <ul class="nav nav-pills nav-stacked samling-nav-pills" id="navbarSamling" role="tablist">
+      <li role="presentation" class="active">
+        <a class="samling-nav-item" href="#samlPropertiesTab" aria-controls="samlPropertiesTab" role="tab"
+           data-toggle="pill">SAML Response Properties</a></li>
+      <li role="presentation" class="">
+        <a class="samling-nav-item" href="#samlResponseTab" aria-controls="samlResponseTab" role="tab"
+           data-toggle="pill">SAML
+          Response</a></li>
+      <li role="presentation" class="">
+        <a class="samling-nav-item" href="#userDetailsTab" aria-controls="userDetailsTab" role="tab"
+           data-toggle="pill">User Details</a></li>
+      <li role="presentation" class="">
+        <a class="samling-nav-item" href="#whatsThisTab" aria-controls="whatsThisTab" role="tab"
+           data-toggle="pill">What is this?</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <div class="col-md-7 col-md-offset-1">
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane samling-tab active" id="samlPropertiesTab">
+        <div class="row">
+          <div class="col-md-9">
+            <form id="samlProps">
+              <div class="form-group" id="nameIdentifierControl">
+                <label class="control-label" for="nameIdentifier">Name Identifier *</label>
+                <input type="text" class="form-control" id="nameIdentifier">
+              </div>
+              <div class="form-group" id="destinationControl">
+                <label class="control-label" for="destination">Callback URL (destination) *</label>
+                <input type="text" class="form-control" id="destination">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="nameIdentifierFormat">Name Identifier Format</label>
+                <input type="text" class="form-control" id="nameIdentifierFormat"
+                       value="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="authnContextClassRef">Authentication Context Class Ref</label>
+                <input type="text" class="form-control" id="authnContextClassRef"
+                       value="urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="issuer">Issuer</label>
+                <input type="text" class="form-control" id="issuer" value="http://capriza.com/samling">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="samlStatusCode">SAML Status Code</label>
+                <input type="text" class="form-control" id="samlStatusCode"
+                       value="urn:oasis:names:tc:SAML:2.0:status:Success">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="samlStatusMessage">SAML Status Message</label>
+                <input type="text" class="form-control" id="samlStatusMessage" value="">
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6" id="signatureKeyControl">
+                  <label class="control-label" for="signatureKey">
+                    Signature Private Key *
+                  </label>
+                  <button id="saveKeyAndCert" type="button" class="btn btn-default btn-xs pull-right">
+                    Save
+                  </button>
+                  <button id="generateKeyAndCert" type="button" class="btn btn-default btn-xs pull-right">
+                    New Pair
+                  </button>
+                  <textarea class="form-control" rows="14" id="signatureKey"
+                            style="font-size: 8px; font-family: monospace; resize: none"></textarea>
+                </div>
+                <div class="form-group col-md-6" id="signatureCertControl">
+                  <label class="control-label" for="signatureCert">Signature Certificate *</label>
+                    <textarea class="form-control" rows="14" id="signatureCert"
+                              style="font-size: 8px; font-family: monospace; resize: none"></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <button id="createResponse" type="button" class="btn btn-primary pull-right">Create Response
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-3 samling-sidebar" id="samlPropertiesHelp">
+            <div class="sidebar-module">
+              <dl>
+                <dt>Name Identifier</dt>
+                <dd>The user name that will appear in the assertion as logged-in.</dd>
+                <dt>Callback URL</dt>
+                <dd>The consumer URL where the SAML Response will be posted back to.</dd>
+                <dt>Signature Private Key</dt>
+                <dd>The private key that will be used to sign the SAML assertion.</dd>
+                <dt>Signature Certificate</dt>
+                <dd>The Signature certificate to embed into the SAML response to be used by the Service Provider
+                  for verifying the signature.
+                </dd>
+                <dt>New Pair</dt>
+                <dd>Generate a new random private/public key pair.</dd>
+                <dt>Save</dt>
+                <dd>Save the private key and certificate to the local storage.</dd>
+                <dt>Create Response</dt>
+                <dd>Create the SAML Response based on the provided properties.
+                  You will be transferred to the <b>SAML Response</b> section.
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane samling-tab" id="samlResponseTab">
+        <div class="row">
+          <div class="col-md-9" role="main">
+
+            <form method="POST" id="samlResponseForm">
+              <div class="row">
+                <div class="form-group col-md-12" id="samlResponseControl">
+                  <label class="control-label" for="signatureKey">
+                    SAML Response *
+                  </label>
+                  <button id="copyResponseToClipboard" type="button" class="btn btn-default btn-xs pull-right"
+                          data-toggle="tooltip" title="Copied!" data-trigger="manual" data-placement="top">
+                    Copy to Clipboard
+                  </button>
+                  <textarea class="form-control" rows="28" name="SAMLResponse" id="samlResponse"
+                            style="font-size: 12px; font-family: monospace; resize: none;overflow: auto"></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group" id="sessionDurationControl">
+                    <label class="control-label" for="sessionDuration">Session Duration *</label>
+                    <input type="text" class="form-control" id="sessionDuration" value="10">
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group" id="callbackUrlControl">
+                    <label class="control-label" for="callbackURL">Callback URL *</label>
+                    <input type="text" class="form-control" id="callbackUrl">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <button class="btn btn-primary pull-right" type="submit" id="postSAMLResponse">Post Response
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-md-3 samling-sidebar">
+            <div class="sidebar-module">
+              <dl>
+                <dt>SAML Response</dt>
+                <dd>This is the saml response the will be posted to the <b>Callback URL</b>.</dd>
+                <dt>Copy to Clipboard</dt>
+                <dd>Copy the SAML response XML to the clipboard.</dd>
+                <dt>Session Duration</dt>
+                <dd>The session duration in minutes. Specify "0" to create a session based cookie which means
+                  that
+                  the cookie will expire after closing the browser tab.
+                </dd>
+                <dt>Callback URL</dt>
+                <dd>The consumer URL where the SAML Response will be posted.</dd>
+              </dl>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane samling-tab" id="userDetailsTab">
+        <div class="row">
+          <div class="col-md-9" role="main">
+            <div class="">
+              <h2 id="signedInUser"></h2>
+              <h5>You have signed in at: <b id="signedInAt">You have not signed in yet.</b></h5>
+              <div style="margin-top: 32px;">
+                <a class="btn btn-default" href="#" role="button" id="signedInLogout">Logout</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 samling-sidebar">
+            <div class="sidebar-module">
+              <p>The currently logged in user details. A user is considered <i>logged-in</i> if there is a
+                cookie present that was previously created in the <b>SAML Response</b> section by clicking on
+                <b>Post Response</b>.
+              </p>
+              <dl>
+                <dt>Logout</dt>
+                <dd>Log the user out, erasing the cookie.</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane samling-tab" id="whatsThisTab">
+        <div class="row">
+          <div class="col-md-9" role="main">
+            <section>
+              <h2>What is SAMLING</h2>
+              <p>SAMLING is a Serverless (as-in client side only) SAML IdP for the purpose of testing SAML integrations.</p>
+              <p>It provides complete control over the SAML response properties that will be sent back to the Service Provider, including simulating errors and the session cookie
+              duration that tracks the logged-in user.</p>
+              <p>If there is a <strong>SAMLRequest</strong> query parameter present, SAMLING will auto populate some of the SAML Response Properties.</p>
+              <p>Generating a SAML Response requires the use of a private key and certificate for signing the SAML Assertion.
+                SAMLING enables to generate a random private/public key and to save them in the local storage so they are used in subsequent SAML responses.</p>
+            </section>
+            <section>
+              <h2>How to Use</h2>
+              <ol>
+                <li>Go to the <strong>SAML Response Properties</strong> section.</li>
+                <li>Fill in the required properties fields. Required fields are marked with an asterisks (*).</li>
+                <li>Click on <strong>Create Response</strong>. You will be be taken the <strong>SAML Response</strong> section.</li>
+                <li>Review the SAML Response then click on <strong>Post Response</strong>.</li>
+              </ol>
+            </section>
+          </div>
+
+          <div class="col-md-3 samling-sidebar">
+            <div class="sidebar-module">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

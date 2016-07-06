@@ -1,0 +1,44 @@
+{
+  "name": "samling",
+  "version": "0.1.0",
+  "description": "Serverless SAML testing",
+  "author": "Capriza Inc. <backend@capriza.com>",
+  "maintainers": [
+    "Nadav Fischer <nadav.fischer@capriza.com>",
+    "Yuval Carmel <yuval.carmel@capriza.com>"
+  ],
+  "homepage": "http://github.com/capriza/samling",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/capriza/samling.git"
+  },
+  "bugs": {
+    "url": "https://github.com/capriza/samling/issues"
+  },
+  "keywords": [
+    "SAML",
+    "saml",
+    "idp",
+    "testing"
+  ],
+  "devDependencies": {
+    "bootstrap": "3.3.6",
+    "brfs": "1.4.3",
+    "browserify": "13.0.1",
+    "clipboard-js": "^0.2.0",
+    "jquery": "2.2.4",
+    "node-forge": "0.6.40",
+    "xml-crypto": "0.8.4",
+    "xmldom": "0.1.22 "
+  },
+  "main": "samling.js",
+  "scripts": {
+    "prepare": "mkdir -p public/js",
+    "bootstrap": "cp -r node_modules/bootstrap/dist/* public/",
+    "jquery": "cp -r node_modules/jquery/dist/* public/js/",
+    "forge": "cd node_modules/node-forge && npm install && npm run bundle && cp js/forge.bundle.js ../../public",
+    "browser": "browserify -g brfs samling.js | sed \"s/require[(]'node-forge'[)]/window.forge/g\" > public/bundle.js",
+    "build": "npm run prepare && npm run bootstrap && npm run jquery && npm run forge && npm run browser"
+  },
+  "license": "MIT"
+}
