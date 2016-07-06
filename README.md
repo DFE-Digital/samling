@@ -1,4 +1,4 @@
-![samling logo](/public/samling.png)
+![samling logo](/public/samling2.png)
 
 Serverless (as in "client side only") SAML IDP for testing SAML integrations.
 
