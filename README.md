@@ -1,7 +1,5 @@
 ![samling logo](/public/samling.png)
 
-# SAMLING
-
 Serverless (as in "client side only") SAML IDP for testing SAML integrations.
 
 ## Live SAMLING
