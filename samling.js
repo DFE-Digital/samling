@@ -1,4 +1,5 @@
 var crypto = require('crypto');
+var fs = require('fs');
 window.CLIPBOARDJS = require('clipboard-js');
 window.SAML = require('./saml');
 const COOKIE_NAME = 'samling';
@@ -47,8 +48,8 @@ $(function() {
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
 
-  $('#signatureCert').val(localStorage.getItem('certVal'));
-  $('#signatureKey').val(localStorage.getItem('privateKeyVal'));
+  $('#signatureCert').val(localStorage.getItem('certVal') || fs.readFileSync('./cert.pem'));
+  $('#signatureKey').val(localStorage.getItem('privateKeyVal') || fs.readFileSync('./key.pem'));
 
   var userControl = $('#signedInUser');
   var cookies = document.cookie.split(';');
