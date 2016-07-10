@@ -270,8 +270,6 @@ $(function() {
       signedInAt: new Date().toUTCString(),
       nameIdentifier: $('#nameIdentifier').val().trim(),
       destination: $('#destination').val().trim(),
-      signatureKey: $('#signatureKey').val().trim(),
-      signatureCert: $('#signatureCert').val().trim(),
       issuer: $('#issuer').val().trim(),
       authnContextClassRef: $('#authnContextClassRef').val().trim(),
       nameIdentifierFormat: $('#nameIdentifierFormat').val().trim(),
