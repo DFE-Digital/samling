@@ -28,7 +28,6 @@ function handleRequest(request) {
     // populate fields from the request
     $('#authnContextClassRef').val(info.login.authnContextClassRef);
     $('#nameIdentifierFormat').val(info.login.nameIdentifierFormat);
-    $('#callbackUrl').val(info.login.callbackUrl);
     $('#destination').val(info.login.callbackUrl);
     $('#issuer').val(info.login.destination);
 
@@ -61,14 +60,11 @@ $(function() {
         var data = JSON.parse(value);
         userControl.text('Hello ' + data.nameIdentifier);
         $('#signedInAt').text(data.signedInAt);
-        $('#signatureKey').val(data.signatureKey);
-        $('#signatureCert').val(data.signatureCert);
         $('#nameIdentifier').val(data.nameIdentifier);
         $('#destination').val(data.destination);
         $('#issuer').val(data.issuer);
         $('#authnContextClassRef').val(data.authnContextClassRef);
         $('#nameIdentifierFormat').val(data.nameIdentifierFormat);
-        $('#callbackUrl').val(data.callbackUrl);
       } catch (e) {
         $('#signedInAt').text('ERROR: ' + e.message);
       }
@@ -272,8 +268,7 @@ $(function() {
       destination: $('#destination').val().trim(),
       issuer: $('#issuer').val().trim(),
       authnContextClassRef: $('#authnContextClassRef').val().trim(),
-      nameIdentifierFormat: $('#nameIdentifierFormat').val().trim(),
-      callbackUrl: $('#callbackUrl').val().trim()
+      nameIdentifierFormat: $('#nameIdentifierFormat').val().trim()
     };
     var cookieValue = btoa(JSON.stringify(cookieData));
     deleteCookie();
