@@ -19,7 +19,7 @@ function logout(info) {
 
 function handleRequest(request) {
   // parse the saml request
-  window.SAML.parseRequest({issuer: $('#issuer').val().trim()}, request, function(info) {
+  window.SAML.parseRequest({issuer: $('#issuer').val().trim(), callbackUrl: $('#callbackUrl').val().trim()}, request, function(info) {
     if (info.logout) {
       logout(info.logout);
       return;
@@ -28,7 +28,7 @@ function handleRequest(request) {
     // populate fields from the request
     $('#authnContextClassRef').val(info.login.authnContextClassRef);
     $('#nameIdentifierFormat').val(info.login.nameIdentifierFormat);
-    $('#destination').val(info.login.callbackUrl);
+    $('#callbackUrl').val(info.login.callbackUrl);
     $('#issuer').val(info.login.destination);
 
     // auto-login if we also have the username already populated because of the samling cookie
@@ -61,7 +61,7 @@ $(function() {
         userControl.text('Hello ' + data.nameIdentifier);
         $('#signedInAt').text(data.signedInAt);
         $('#nameIdentifier').val(data.nameIdentifier);
-        $('#destination').val(data.destination);
+        $('#callbackUrl').val(data.callbackUrl);
         $('#issuer').val(data.issuer);
         $('#authnContextClassRef').val(data.authnContextClassRef);
         $('#nameIdentifierFormat').val(data.nameIdentifierFormat);
@@ -164,7 +164,7 @@ $(function() {
 
   $('#createResponse').click(function() {
     $('#nameIdentifierControl').removeClass('has-error');
-    $('#destinationControl').removeClass('has-error');
+    $('#callbackUrlControl').removeClass('has-error');
     $('#signatureKeyControl').removeClass('has-error');
     $('#signatureCertControl').removeClass('has-error');
 
@@ -175,9 +175,9 @@ $(function() {
       error = true;
     }
 
-    if ($('#destination').val().trim().length === 0) {
-      $('#destinationControl').addClass('has-error');
-      !error && $('#destination').focus();
+    if ($('#callbackUrl').val().trim().length === 0) {
+      $('#callbackUrlControl').addClass('has-error');
+      !error && $('#callbackUrl').focus();
       error = true;
     }
 
@@ -206,17 +206,17 @@ $(function() {
       nameIdentifier: $('#nameIdentifier').val().trim()
     };
     var assertion = window.SAML.createAssertion(options);
-    var destination = $('#destination').val().trim();
+    var callbackUrl = $('#callbackUrl').val().trim();
     var response = window.SAML.createResponse({
       instant: new Date().toISOString().trim(),
       issuer: $('#issuer').val().trim(),
-      destination: destination,
+      destination: callbackUrl,
       assertion: assertion,
       samlStatusCode: $('#samlStatusCode').val().trim(),
       samlStatusMessage: $('#samlStatusMessage').val().trim()
     });
     $('#samlResponse').val(response);
-    $('#callbackUrl').val(destination);
+    $('#callbackUrl').val(callbackUrl);
     $('#navbarSamling a[href="#samlResponseTab"]').tab('show')
   });
 
@@ -265,7 +265,7 @@ $(function() {
     var cookieData = {
       signedInAt: new Date().toUTCString(),
       nameIdentifier: $('#nameIdentifier').val().trim(),
-      destination: $('#destination').val().trim(),
+      destination: $('#callbackUrl').val().trim(),
       issuer: $('#issuer').val().trim(),
       authnContextClassRef: $('#authnContextClassRef').val().trim(),
       nameIdentifierFormat: $('#nameIdentifierFormat').val().trim()

@@ -65,7 +65,7 @@ exports.parseRequest = function(options, request, callback) {
         }
       } else if (rootElement.localName == 'LogoutRequest') {
         info.logout = {};
-        info.logout.callbackUrl = rootElement.getAttribute('Destination');
+        info.logout.callbackUrl = options.callbackUrl;
         info.logout.response =
             '<samlp:LogoutResponse xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ' +
             'xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="_' + crypto.randomBytes(21).toString('hex') +
@@ -200,8 +200,8 @@ exports.createResponse = function(options) {
   if (options.inResponseTo) {
     response += ' InResponseTo="' + options.inResponseTo + '"';
   }
-  if (options.destination) {
-    response += ' Destination="' + options.destination + '"';
+  if (options.callbackUrl) {
+    response += ' Destination="' + options.callbackUrl + '"';
   }
   response += '><saml:Issuer>' + options.issuer + '</saml:Issuer>';
   response += '<samlp:Status><samlp:StatusCode Value="' + options.samlStatusCode + '"/>';
