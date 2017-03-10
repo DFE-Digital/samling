@@ -18,11 +18,10 @@
 
 <nav class="navbar navbar-static-top samling-navbar">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <img class="samling-brand-logo" data-toggle="tooltip"
-           title="Samling logo courtesy of Arturo Alejandro Romo Escartin" data-placement="bottom"
-           src="https://capriza.github.io/images/logos/logos-scorpion.svg" style="height: 32px" >
-    </div>
+    <span class="navbar-header ">
+      <img class="samling-brand-logo" src="https://capriza.github.io/images/logos/logos-scorpion.svg" >
+      <span class="samling-brand">SAMLING <span class="samling-brand-subtitle">Serverless SAML IDP</span></span>
+    </span>
   </div>
 </nav>
 
@@ -53,6 +52,12 @@
         <div class="row">
           <div class="col-md-9">
             <form id="samlProps">
+              <div class="row">
+                <div class="col-md-12">
+                  <button id="createResponse" type="button" class="btn btn-lg pull-right">Next >
+                  </button>
+                </div>
+              </div>
               <div class="form-group" id="nameIdentifierControl">
                 <label class="control-label" for="nameIdentifier">Name Identifier *</label>
                 <input type="text" class="form-control" id="nameIdentifier">
@@ -105,12 +110,6 @@
                               style="font-size: 8px; font-family: monospace; resize: none"></textarea>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <button id="createResponse" type="button" class="btn btn-primary pull-right">Create Response
-                  </button>
-                </div>
-              </div>
             </form>
           </div>
           <div class="col-md-3 samling-sidebar" id="samlPropertiesHelp">
@@ -145,8 +144,28 @@
 
             <form method="POST" id="samlResponseForm">
               <div class="row">
+                <div class="col-md-12">
+                  <button class="btn btn-lg pull-right" type="submit" id="postSAMLResponse">Post Response!
+                  </button>
+                </div>
+              </div>
+              <div class="row">
                 <div class="form-group col-md-12" id="samlResponseControl">
-                  <label class="control-label" for="signatureKey">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group" id="sessionDurationControl">
+                        <label class="control-label" for="sessionDuration">Session Duration *</label>
+                        <input type="text" class="form-control" id="sessionDuration" value="10">
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="form-group" id="callbackUrlControl">
+                        <label class="control-label" for="callbackURL">Destination</label>
+                        <input type="text" class="form-control" id="callbackUrl" readonly>
+                      </div>
+                    </div>
+                  </div>
+                  <label class="control-label" for="samlResponse">
                     SAML Response *
                   </label>
                   <button id="copyResponseToClipboard" type="button" class="btn btn-default btn-xs pull-right"
@@ -155,26 +174,7 @@
                   </button>
                   <textarea class="form-control" rows="28" name="SAMLResponse" id="samlResponse"
                             style="font-size: 12px; font-family: monospace; resize: none;overflow: auto"></textarea>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group" id="sessionDurationControl">
-                    <label class="control-label" for="sessionDuration">Session Duration *</label>
-                    <input type="text" class="form-control" id="sessionDuration" value="10">
-                  </div>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group" id="callbackUrlControl">
-                    <label class="control-label" for="callbackURL">Destination</label>
-                    <input type="text" class="form-control" id="callbackUrl" readonly>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <button class="btn btn-primary pull-right" type="submit" id="postSAMLResponse">Post Response
-                  </button>
+
                 </div>
               </div>
             </form>
