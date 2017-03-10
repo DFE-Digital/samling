@@ -37927,7 +37927,7 @@ $(function() {
     var cookieData = {
       signedInAt: new Date().toUTCString(),
       nameIdentifier: $('#nameIdentifier').val().trim(),
-      destination: $('#callbackUrl').val().trim(),
+      callbackUrl: $('#callbackUrl').val().trim(),
       issuer: $('#issuer').val().trim(),
       authnContextClassRef: $('#authnContextClassRef').val().trim(),
       nameIdentifierFormat: $('#nameIdentifierFormat').val().trim()
