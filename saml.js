@@ -206,7 +206,7 @@ exports.createResponse = function(options) {
   response += '><saml:Issuer>' + options.issuer + '</saml:Issuer>';
   response += '<samlp:Status><samlp:StatusCode Value="' + options.samlStatusCode + '"/>';
   if (options.samlStatusMessage) {
-    response += '<samlp:StatusMessage Value="' + options.samlStatusMessage + '"/>';
+    response += '<samlp:StatusMessage>' + options.samlStatusMessage + '</samlp:StatusMessage>';
   }
   response += '</samlp:Status>';
   response += options.assertion;
