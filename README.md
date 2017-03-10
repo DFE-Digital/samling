@@ -1,4 +1,7 @@
-![samling logo](/public/samling2.png)
+<div align="center"><img src="https://capriza.github.io/images/logos/logos-scorpion.svg" height="128" /></div>
+
+Samling
+===
 
 Serverless (as in "client side only") SAML IDP for testing SAML integrations.
 
