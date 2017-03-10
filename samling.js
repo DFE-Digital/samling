@@ -216,7 +216,7 @@ $(function() {
       samlStatusMessage: $('#samlStatusMessage').val().trim()
     });
     $('#samlResponse').val(response);
-    $('#callbackUrl').val(callbackUrl);
+    $('#callbackUrlReadOnly').val(callbackUrl);
     $('#navbarSamling a[href="#samlResponseTab"]').tab('show')
   });
 

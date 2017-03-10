@@ -1,1 +1,4 @@
 .idea/
+node_modules/
+public/bundle.js
+public/forge.bundle.js
