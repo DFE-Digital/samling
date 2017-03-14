@@ -37673,7 +37673,8 @@ function deleteCookie() {
 function logout(info) {
   deleteCookie();
   if (info) {
-    location.href = info.callbackUrl + '?SAMLResponse=' + encodeURIComponent(btoa(info.response));
+    var delim = info.callbackUrl.indexOf('?') === -1 ? '?' : '&';
+    location.href = info.callbackUrl + delim + 'SAMLResponse=' + encodeURIComponent(btoa(info.response));
   } else {
     location.href = location.href.replace(location.search, '');
   }
